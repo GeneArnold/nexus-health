@@ -15,6 +15,8 @@ You need Docker and Docker Compose.
 ```bash
 git clone https://github.com/GeneArnold/nexus-health.git
 cd nexus-health
+cp .env.example .env
+# Edit .env and set SESSION_SECRET (run: openssl rand -base64 32)
 docker compose up -d
 ```
 
@@ -31,6 +33,7 @@ To override defaults, copy `.env.example` to `.env` and edit:
 
 | Variable | Default | Notes |
 |---|---|---|
+| `SESSION_SECRET` | _(required)_ | Used to sign session cookies. Must be at least 32 characters. Generate with `openssl rand -base64 32`. |
 | `POSTGRES_USER` | `nexus` | Postgres username |
 | `POSTGRES_PASSWORD` | `nexus` | Postgres password |
 | `POSTGRES_DB` | `nexus_health` | Database name |
@@ -43,7 +46,7 @@ To override defaults, copy `.env.example` to `.env` and edit:
 - React 19
 - Postgres 16
 - Prisma (ORM + migrations)
-- Auth.js (email + password, invite-only)
+- JWT sessions (`jose` + HTTP-only cookies)
 - Tailwind CSS 4
 - TypeScript
 

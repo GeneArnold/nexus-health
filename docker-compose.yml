@@ -7,6 +7,7 @@ services:
       - "3000:3000"
     environment:
       DATABASE_URL: postgres://${POSTGRES_USER:-nexus}:${POSTGRES_PASSWORD:-nexus}@postgres:5432/${POSTGRES_DB:-nexus_health}
+      SESSION_SECRET: "${SESSION_SECRET:?SESSION_SECRET is required (generate with: openssl rand -base64 32)}"
       ADMIN_EMAIL: ${ADMIN_EMAIL:-admin}
       ADMIN_PASSWORD: ${ADMIN_PASSWORD:-password}
       NODE_ENV: production
